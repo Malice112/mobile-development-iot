@@ -1,11 +1,19 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Switch, StyleSheet } from 'react-native';
 
-export default function TarefaItem({ tarefa, onRemover }) {
+export default function TarefaItem({ tarefa, onRemover, onToggle }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.texto}>{tarefa.texto}</Text>
+      <Switch
+        value={tarefa.concluida}
+        onValueChange={() => onToggle(tarefa.id)}
+        trackColor={{ false: '#FFB3C1', true: '#FF7994' }}
+        thumbColor={tarefa.concluida ? '#B12843' : '#FFF4F6'}
+      />
+      <Text style={[styles.texto, tarefa.concluida && styles.textoConcluido]}>
+        {tarefa.texto}
+      </Text>
       <TouchableOpacity onPress={() => onRemover(tarefa.id)}>
-        <Text style={styles.remover}>❌</Text>
+        <Text style={styles.remover}>✕</Text>
       </TouchableOpacity>
     </View>
   );
@@ -14,12 +22,25 @@ export default function TarefaItem({ tarefa, onRemover }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 12,
-    marginVertical: 4,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 8,
+    alignItems: 'center',
+    backgroundColor: '#FFF4F6',
+    borderRadius: 16,
+    padding: 16,
+    marginVertical: 6,
+    gap: 12,
   },
-  texto: { fontSize: 16 },
-  remover: { fontSize: 18 },
+  texto: {
+    flex: 1,
+    fontSize: 16,
+    color: '#B12843',
+  },
+  textoConcluido: {
+    textDecorationLine: 'line-through',
+    color: '#FF7994',
+  },
+  remover: {
+    fontSize: 18,
+    color: '#FF7994',
+    fontWeight: 'bold',
+  },
 });
