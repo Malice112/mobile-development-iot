@@ -15,19 +15,26 @@ export default function App() {
           : <CarrinhoScreen />}
       </View>
 
-      {/* Navbar */}
+
       <View style={styles.navbar}>
         <TouchableOpacity
           style={[styles.botao, telaAtual === 'produtos' && styles.botaoAtivo]}
           onPress={() => setTelaAtual('produtos')}
         >
-          <Text style={styles.botaoTexto}>🛍️ Produtos</Text>
+          <Text style={[styles.botaoTexto, telaAtual === 'produtos' && styles.botaoTextoAtivo]}>
+            🛍️ PRODUTOS
+          </Text>
         </TouchableOpacity>
+
+        <View style={styles.navDivisor} />
+
         <TouchableOpacity
           style={[styles.botao, telaAtual === 'carrinho' && styles.botaoAtivo]}
           onPress={() => setTelaAtual('carrinho')}
         >
-          <Text style={styles.botaoTexto}>🛒 Carrinho</Text>
+          <Text style={[styles.botaoTexto, telaAtual === 'carrinho' && styles.botaoTextoAtivo]}>
+            🛒 CARRINHO
+          </Text>
         </TouchableOpacity>
       </View>
     </CarrinhoProvider>
@@ -38,21 +45,30 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   navbar: {
     flexDirection: 'row',
-    backgroundColor: '#9C27B0',
-    paddingVertical: 14,
+    backgroundColor: '#FFE600',
+    borderTopWidth: 4,
+    borderTopColor: '#0A0A0A',
   },
   botao: {
     flex: 1,
+    paddingVertical: 18,
     alignItems: 'center',
-    paddingVertical: 4,
+    justifyContent: 'center',
   },
   botaoAtivo: {
-    borderBottomWidth: 3,
-    borderBottomColor: '#fff',
+    backgroundColor: '#0A0A0A',
   },
   botaoTexto: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 15,
+    fontSize: 13,
+    fontWeight: '900',
+    color: '#0A0A0A',
+    letterSpacing: 2,
+  },
+  botaoTextoAtivo: {
+    color: '#FFE600',
+  },
+  navDivisor: {
+    width: 4,
+    backgroundColor: '#0A0A0A',
   },
 });
